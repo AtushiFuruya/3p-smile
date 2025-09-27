@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(python3:*)",
+      "Read(//Users/furuyaatsushi/Documents/村上さんWebページ制作/circle-smile/pages/contact/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

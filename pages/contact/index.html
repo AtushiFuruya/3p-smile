@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - 3PサークルSmile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000, #7f1d1d, #be185d);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #ff1744, #e91e63, #ff6b9d, #ff1744);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 300% 300%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 23, 68, 0.1);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+        .sexy-glow {
+            /* text-shadow: 0 0 10px #ff1744, 0 0 20px #e91e63, 0 0 30px #ff6b9d; */
+            filter: drop-shadow(0 0 15px rgba(255, 23, 68, 0.5));
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text">
+                    <a href="../../index.html">3PサークルSmile</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="../../index.html" class="hover:text-pink-400 transition-colors duration-300">ホーム</a>
+                    <a href="../about/" class="hover:text-pink-400 transition-colors duration-300">概要</a>
+                    <a href="../profiles/" class="hover:text-pink-400 transition-colors duration-300">メンバー紹介</a>
+                    <a href="../contact/" class="text-pink-400">お問い合わせ</a>
+                    <a href="../faq/" class="hover:text-pink-400 transition-colors duration-300">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 px-4 md:px-6">
+        <div class="container mx-auto max-w-6xl">
+
+            <!-- Header -->
+            <section class="text-center py-8 md:py-16">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text sexy-glow" id="page-title">
+                    お問い合わせ
+                </h1>
+                <p class="text-lg md:text-xl lg:text-2xl mb-8 text-pink-200 max-w-4xl mx-auto" id="page-subtitle">
+                    ご質問やご相談がございましたら、お気軽にお声かけください
+                </p>
+                <div id="female-notice" class="hidden bg-pink-500/20 border border-pink-400/50 rounded-xl p-4 md:p-6 mx-auto max-w-4xl">
+                    <p class="text-pink-200 text-base md:text-lg">
+                        まずは問い合わせだけでも可能。その際は備考欄にその旨を記入すれば、匿名でのご相談が可能です。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact Form -->
+            <section class="mb-8 md:mb-16">
+                <div class="glass-effect rounded-xl md:rounded-2xl p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 gradient-text text-center">お問い合わせフォーム</h2>
+
+                    <div class="text-center mb-8">
+                        <p class="text-gray-200 mb-6">以下のフォームからお問い合わせください</p>
+                        <a href="https://forms.gle/kugAAnzUJk3k6zTp8" target="_blank" rel="noopener noreferrer"
+                           class="inline-block bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 px-12 py-4 rounded-full text-white font-bold transition-all duration-300 hover:scale-105 sexy-glow">
+                            フォームを開く
+                        </a>
+                    </div>
+
+                    <div class="text-center text-gray-400 text-sm">
+                        <p>※ 新しいタブでGoogleフォームが開きます</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Info -->
+            <section class="mb-8 md:mb-16">
+                <div class="glass-effect rounded-xl md:rounded-2xl p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 gradient-text text-center">その他の連絡方法</h2>
+
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="text-center">
+                            <h3 class="text-lg md:text-xl font-bold mb-2 text-pink-200">メール</h3>
+                            <p class="text-gray-300">
+                                <a href="mailto:3psmile@gmail.com" class="hover:text-pink-400 transition-colors duration-300">
+                                    3psmile@gmail.com
+                                </a>
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">24時間受付（返信は1-2営業日内）</p>
+                        </div>
+
+                        <div class="text-center">
+                            <h3 class="text-lg md:text-xl font-bold mb-2 text-pink-200">SNS</h3>
+                            <p class="text-gray-300">
+                                <a href="https://x.com/3pSmile58465" target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 transition-colors duration-300">
+                                    @3pSmile58465
+                                </a>
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">DMでもお気軽にどうぞ</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Link -->
+            <section class="text-center">
+                <div class="glass-effect rounded-xl md:rounded-2xl p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 gradient-text">よくある質問もご確認ください</h3>
+                    <p class="text-gray-200 mb-6">お問い合わせの前に、よくある質問をご確認いただくと、より早く解決できる場合があります。</p>
+                    <a href="../faq/" class="inline-block border-2 border-pink-400 hover:bg-pink-400 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+                        FAQを見る
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-700 mt-16">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">
+                &copy; 2025 3PサークルSmile. All rights reserved.
+            </p>
+            <div class="mt-4 text-xl md:text-2xl gradient-text font-bold">
+                Together We Create
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // URLパラメーターを確認して表示を切り替える
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+
+            const pageTitle = document.getElementById('page-title');
+            const pageSubtitle = document.getElementById('page-subtitle');
+            const femaleNotice = document.getElementById('female-notice');
+
+            if (type === 'female') {
+                pageTitle.textContent = '女性の方へ - お問い合わせ';
+                pageSubtitle.textContent = '女性の皆様、お気軽にお声かけください';
+                femaleNotice.classList.remove('hidden');
+                document.title = '女性の方へ - お問い合わせ - 3PサークルSmile';
+            } else if (type === 'male') {
+                pageTitle.textContent = '男性の方へ - お問い合わせ';
+                pageSubtitle.textContent = '男性の皆様、お気軽にお声かけください';
+                document.title = '男性の方へ - お問い合わせ - 3PサークルSmile';
+            }
+        });
+    </script>
+
+</body>
+</html>
