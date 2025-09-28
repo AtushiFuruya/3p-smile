@@ -16,6 +16,9 @@
 
         body {
             padding-top: var(--nav-height);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         body.menu-open {
@@ -106,10 +109,28 @@
             background: linear-gradient(45deg, rgba(255, 23, 68, 0.2), rgba(233, 30, 99, 0.2), rgba(0, 0, 0, 0.4));
         }
 
+        .page-shell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(56px, 12vh, 96px);
+        }
+
+        .hero-section {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(48px, 10vh, 96px) 0;
+            min-height: calc(100vh - var(--nav-height));
+        }
+
         .video-container {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 100%;
+            min-height: inherit;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -255,9 +276,12 @@
             }
         }
 
-        @keyframes heroFadeOut {
-            to {
-                opacity: 0;
+        @keyframes heroGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 18px rgba(255, 107, 157, 0.6));
+            }
+            50% {
+                filter: drop-shadow(0 0 26px rgba(255, 179, 208, 0.85));
             }
         }
 
@@ -273,17 +297,6 @@
                 transform: translateY(0);
             }
         }
-
-        @keyframes heroContainerExit {
-            to {
-                opacity: 0;
-                max-height: 0;
-                margin-bottom: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-            }
-        }
-
 
         .site-nav {
             position: fixed;
@@ -513,10 +526,9 @@
         }
 
         .navigation-section {
-            width: 100%;
-            max-width: 1200px;
+            width: min(90%, 1200px);
             margin: clamp(18px, 8vh, 96px) auto 0;
-            padding: 0 1rem;
+            padding: 0 clamp(12px, 2vw, 20px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -529,10 +541,9 @@
         }
 
         .application-buttons-section {
-            width: 100%;
-            max-width: 1100px;
+            width: min(90%, 1200px);
             margin: clamp(28px, 7vh, 80px) auto 0;
-            padding: 0 clamp(12px, 4vw, 24px) clamp(36px, 5vh, 48px);
+            padding: 0 clamp(12px, 2vw, 20px) clamp(36px, 5vh, 48px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -551,10 +562,9 @@
 
 
         .text-container-inner {
-            width: 100%;
-            max-width: 1200px;
+            width: min(90%, 1200px);
             margin: 0 auto;
-            padding: clamp(24px, 4vh, 64px) 1rem;
+            padding: clamp(24px, 4vh, 64px) clamp(12px, 2vw, 20px);
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -563,8 +573,6 @@
             text-align: center;
             gap: clamp(12px, 3vh, 24px);
             min-height: clamp(220px, 48vh, 380px);
-            animation: heroContainerExit 0.4s ease-in forwards;
-            animation-delay: 1.6s;
         }
 
         .hero-svg {
@@ -587,7 +595,7 @@
             stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
             filter: url(#glow);
-            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroFadeOut 0.4s ease-in forwards 1.5s;
+            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroGlow 6s ease-in-out infinite 2.3s;
         }
 
         .hero-title tspan {
@@ -599,8 +607,8 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
+                padding-left: clamp(8px, 4vw, 16px);
+                padding-right: clamp(8px, 4vw, 16px);
             }
 
             .text-container-inner {
@@ -616,8 +624,8 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding-left: clamp(12px, 3vw, 24px);
+                padding-right: clamp(12px, 3vw, 24px);
             }
 
             .hero-title {
@@ -629,8 +637,8 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding-left: 2rem;
-                padding-right: 2rem;
+                padding-left: clamp(16px, 2vw, 32px);
+                padding-right: clamp(16px, 2vw, 32px);
             }
 
             .hero-title {
@@ -884,6 +892,10 @@
         .cta-card:hover .cta-card-cta {
             transform: translate3d(0, 0, 70px);
         }
+
+        footer {
+            margin-top: auto;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-black via-red-900 to-pink-900 text-white overflow-x-hidden">
@@ -958,8 +970,9 @@
         </div>
     </div>
 
+    <main class="page-shell">
     <!-- Hero Section with Video -->
-    <section id="home" class="relative h-screen flex items-center justify-center perspective">
+    <section id="home" class="hero-section perspective">
         <div class="absolute inset-0 z-0 video-container">
             <video
                 id="hero-video"
@@ -1082,6 +1095,7 @@
             </div>
         </div>
     </section>
+    </main>
 
 
 
@@ -1199,21 +1213,22 @@
             });
         });
 
-        // Dynamic 3D mouse interaction
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.card-hover');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+        // Dynamic highlight interaction
+        const interactiveCards = document.querySelectorAll('.nav-card, .cta-card');
 
-            cards.forEach(card => {
+        interactiveCards.forEach(card => {
+            const updateHighlight = (event) => {
                 const rect = card.getBoundingClientRect();
-                const cardX = (rect.left + rect.width / 2) / window.innerWidth;
-                const cardY = (rect.top + rect.height / 2) / window.innerHeight;
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--pointer-x', `${x}%`);
+                card.style.setProperty('--pointer-y', `${y}%`);
+            };
 
-                const deltaX = (mouseX - cardX) * 10;
-                const deltaY = (mouseY - cardY) * 10;
-
-                card.style.transform = `rotateX(${-deltaY}deg) rotateY(${deltaX}deg)`;
+            card.addEventListener('pointermove', updateHighlight);
+            card.addEventListener('pointerleave', () => {
+                card.style.setProperty('--pointer-x', '50%');
+                card.style.setProperty('--pointer-y', '50%');
             });
         });
 
