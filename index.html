@@ -330,7 +330,7 @@
 
         .hero-title {
             font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-            font-size: clamp(2.6rem, 6vw, 6.5rem);
+            font-size: clamp(3rem, calc(6vw + 1vh), 7.5rem);
             font-weight: 700;
             fill: url(#redGradient);
             fill-opacity: 0;
@@ -346,6 +346,7 @@
 
         .hero-title tspan {
             text-anchor: middle;
+            dominant-baseline: middle;
         }
 
         @media (max-width: 480px) {
@@ -353,6 +354,10 @@
             .navigation-section,
             .application-buttons-section {
                 padding: 0 0.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.6rem, calc(10vw + 1.5vh), 4.2rem);
             }
         }
 
@@ -362,6 +367,10 @@
             .application-buttons-section {
                 padding: 0 1rem;
             }
+
+            .hero-title {
+                font-size: clamp(3.2rem, calc(7.5vw + 1vh), 5.2rem);
+            }
         }
 
         @media (min-width: 769px) {
@@ -369,6 +378,10 @@
             .navigation-section,
             .application-buttons-section {
                 padding: 0 2rem;
+            }
+
+            .hero-title {
+                font-size: clamp(4.2rem, calc(5vw + 2vh), 8rem);
             }
         }
 
@@ -423,7 +436,7 @@
         <div class="relative z-10 w-full h-full flex flex-col justify-center items-center">
             <!-- Text Container -->
             <div class="text-container-inner">
-                <svg viewBox="0 0 1000 300" class="hero-svg">
+                <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" class="hero-svg">
                     <defs>
                         <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#ff1744" />
@@ -440,7 +453,7 @@
                     </defs>
                     <text x="50%" y="45%" text-anchor="middle" dominant-baseline="middle" class="hero-title">
                         <tspan x="50%" dy="0">火戯び知らずに、</tspan>
-                        <tspan x="50%" dy="1.2em">生きていく？</tspan>
+                        <tspan x="50%" dy="1.1em">生きていく？</tspan>
                     </text>
                 </svg>
             </div>
