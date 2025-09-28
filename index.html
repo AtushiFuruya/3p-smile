@@ -162,10 +162,6 @@
         }
 
         @media (max-width: 600px) {
-            .hero-section {
-                padding-top: 30vh;
-            }
-
             .video-container {
                 height: calc(100% + 30vh);
                 margin-top: -30vh;
@@ -181,6 +177,14 @@
 
             .text-container-inner.hero-stage .hero-title {
                 font-size: clamp(6.4rem, calc(12vw + 2.4vh), 12rem);
+            }
+
+            .hero-stage {
+                transform: translateY(15vh);
+            }
+
+            .hero-stage.hero-stage-hide {
+                transform: translateY(-16px);
             }
         }
 
