@@ -142,6 +142,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            transform-origin: center top;
         }
 
         @media (max-width: 768px) {
@@ -158,6 +159,29 @@
 
             .svg-container {
                 padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-section {
+                padding-top: calc(48px + 30vh);
+            }
+
+            .video-container {
+                height: calc(100% + 30vh);
+                margin-top: -30vh;
+            }
+
+            .video-container video {
+                height: calc(100% + 30vh);
+            }
+
+            .text-container-inner.hero-stage {
+                font-size: 2em;
+            }
+
+            .text-container-inner.hero-stage .hero-title {
+                font-size: clamp(6.4rem, calc(12vw + 2.4vh), 12rem);
             }
         }
 
