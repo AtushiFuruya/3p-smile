@@ -227,6 +227,47 @@
             }
         }
 
+        @keyframes heroDraw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes heroFill {
+            to {
+                fill-opacity: 1;
+            }
+        }
+
+        @keyframes heroFadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes navFadeIn {
+            from {
+                opacity: 0;
+                filter: blur(12px);
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0px);
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroContainerExit {
+            to {
+                opacity: 0;
+                max-height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
 
         .navigation-section {
             width: 100%;
@@ -237,8 +278,10 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            animation: blurFadeIn 2s ease-out forwards;
-            animation-delay: 8s;
+            filter: blur(12px);
+            transform: translateY(20px);
+            animation: navFadeIn 0.8s ease-out forwards;
+            animation-delay: 1.9s;
             box-sizing: border-box;
         }
 
@@ -251,8 +294,8 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            animation: blurFadeIn 2s ease-out forwards;
-            animation-delay: 10s;
+            animation: blurFadeIn 1.2s ease-out forwards;
+            animation-delay: 2.6s;
             box-sizing: border-box;
         }
 
@@ -270,12 +313,39 @@
             margin: 0 auto;
             padding: 0 1rem;
             text-align: center;
-            transition: all 2s ease-out;
-            transform: translateY(0);
             box-sizing: border-box;
+            max-height: 360px;
+            overflow: hidden;
+            animation: heroContainerExit 0.4s ease-in forwards;
+            animation-delay: 1.6s;
         }
 
-        .text-container-inner.moved {
+        .hero-svg {
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            min-height: 180px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+            font-size: clamp(2.6rem, 6vw, 6.5rem);
+            font-weight: 700;
+            fill: url(#redGradient);
+            fill-opacity: 0;
+            stroke: url(#redGradient);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            filter: url(#glow);
+            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroFadeOut 0.4s ease-in forwards 1.5s;
+        }
+
+        .hero-title tspan {
+            text-anchor: middle;
         }
 
         @media (max-width: 480px) {
@@ -353,7 +423,7 @@
         <div class="relative z-10 w-full h-full flex flex-col justify-center items-center">
             <!-- Text Container -->
             <div class="text-container-inner">
-                <svg width="100%" height="auto" viewBox="0 0 1000 300" class="text-fade-in" style="min-height: 200px; max-height: 300px;">
+                <svg viewBox="0 0 1000 300" class="hero-svg">
                     <defs>
                         <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#ff1744" />
@@ -368,11 +438,9 @@
                             </feMerge>
                         </filter>
                     </defs>
-                    <text x="50%" y="35%" text-anchor="middle" dominant-baseline="middle" class="svg-text">
-                        火戯び知らずに、
-                    </text>
-                    <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="svg-text">
-                        生きていく？
+                    <text x="50%" y="45%" text-anchor="middle" dominant-baseline="middle" class="hero-title">
+                        <tspan x="50%" dy="0">火戯び知らずに、</tspan>
+                        <tspan x="50%" dy="1.2em">生きていく？</tspan>
                     </text>
                 </svg>
             </div>
@@ -514,13 +582,6 @@
             });
         });
 
-        // Manage text movement transitions
-        setTimeout(() => {
-            const textContainers = document.querySelectorAll('.text-container-inner');
-            textContainers.forEach(container => {
-                container.classList.add('moved');
-            });
-        }, 8000);
     </script>
 </body>
 </html>
