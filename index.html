@@ -6,6 +6,22 @@
     <title>3PサークルSmile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        :root {
+            --nav-height: clamp(70px, 11vw, 96px);
+        }
+
+        html {
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            padding-top: var(--nav-height);
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotateX(0deg); }
             50% { transform: translateY(-20px) rotateX(5deg); }
@@ -269,10 +285,237 @@
         }
 
 
-        .navigation-section {
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 80;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(135deg, rgba(24, 5, 14, 0.78), rgba(73, 12, 31, 0.72));
+            border-bottom: 1px solid rgba(255, 128, 160, 0.2);
+        }
+
+        .nav-inner {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 32px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(12px, 4vw, 24px);
+        }
+
+        .nav-brand {
+            font-size: clamp(1.4rem, 2.6vw, 2rem);
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: clamp(20px, 3vw, 32px);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: rgba(255, 235, 245, 0.85);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus-visible {
+            color: #ffd0e6;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 58, 118, 0.8), rgba(255, 165, 195, 0.8));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-toggle {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 128, 160, 0.4);
+            background: rgba(36, 9, 20, 0.6);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #ffd0e0;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-toggle:hover,
+        .nav-toggle:focus-visible {
+            border-color: rgba(255, 165, 195, 0.75);
+            background: rgba(52, 15, 28, 0.75);
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #ffd0e0;
+            border-radius: 999px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle.open {
+            border-color: rgba(255, 165, 195, 0.8);
+            background: rgba(52, 15, 28, 0.8);
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 2, 6, 0.7);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            z-index: 95;
+        }
+
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu-content {
+            width: min(88vw, 420px);
+            padding: clamp(32px, 8vw, 48px);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(30, 8, 20, 0.9), rgba(78, 16, 40, 0.82));
+            border: 1px solid rgba(255, 128, 160, 0.35);
+            box-shadow: rgba(255, 128, 160, 0.35) 0 28px 60px -24px;
+            display: grid;
+            gap: clamp(16px, 3vh, 28px);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .mobile-menu-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+        }
+
+        .mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 128, 160, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(36, 9, 20, 0.55);
+            color: #ffd0e0;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .mobile-menu-close svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .mobile-menu-close:hover,
+        .mobile-menu-close:focus-visible {
+            border-color: rgba(255, 165, 195, 0.75);
+            background: rgba(52, 15, 28, 0.75);
+        }
+
+        .mobile-menu-links {
+            display: grid;
+            gap: clamp(18px, 4vh, 28px);
+            padding-top: clamp(12px, 2vh, 18px);
+        }
+
+        .mobile-menu-link {
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffe4ef;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .mobile-menu-link:hover,
+        .mobile-menu-link:focus-visible {
+            color: #ffd0e6;
+        }
+
+        .navigation-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: clamp(18px, 8vh, 96px) auto 0;
             padding: 0 1rem;
             display: flex;
             justify-content: center;
@@ -406,9 +649,9 @@
             position: relative;
             display: block;
             padding: clamp(28px, 5vw, 36px) clamp(20px, 3vw, 28px) clamp(26px, 4vw, 34px);
-            border: 1px solid rgba(255, 128, 160, 0.45);
-            border-radius: 24px;
-            background: linear-gradient(135deg, rgba(35, 12, 20, 0.68), rgba(88, 18, 45, 0.6));
+            border: 1px solid rgba(255, 128, 160, 0.38);
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(35, 12, 20, 0.72), rgba(88, 18, 45, 0.64));
             box-shadow: rgba(255, 128, 160, 0.25) 0 20px 45px -20px;
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
@@ -427,15 +670,32 @@
             opacity: 0.75;
         }
 
+        .nav-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -40% -60% auto;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 180, 210, 0.25), transparent 70%);
+            transform: translate3d(0, 0, 30px) rotate(15deg);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
         .nav-card:hover {
             transform: rotate3d(0.35, 0.75, 0, 18deg) translateY(-4px);
             box-shadow: rgba(255, 23, 68, 0.4) 0 22px 60px -18px;
-            border-color: rgba(255, 160, 190, 0.85);
+            border-color: rgba(255, 168, 198, 0.78);
         }
 
         .nav-card:hover::before {
             transform: translate3d(-12px, -6px, 80px);
             opacity: 1;
+        }
+
+        .nav-card:hover::after {
+            opacity: 1;
+            transform: translate3d(16px, 10px, 70px) rotate(0deg);
         }
 
         .nav-card-content {
@@ -514,7 +774,7 @@
         .cta-card {
             position: relative;
             display: block;
-            border-radius: 28px;
+            border-radius: 14px;
             padding: clamp(28px, 5vw, 36px);
             background: linear-gradient(135deg, rgba(45, 18, 32, 0.75), rgba(91, 24, 50, 0.6));
             border: 1px solid rgba(255, 140, 175, 0.5);
@@ -536,6 +796,18 @@
             opacity: 0.8;
         }
 
+        .cta-card::after {
+            content: "";
+            position: absolute;
+            inset: auto auto -55% -30%;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(255, 203, 222, 0.22), transparent 72%);
+            transform: translate3d(0, 0, 30px) rotate(-12deg);
+            opacity: 0;
+            transition: transform 0.45s ease, opacity 0.45s ease;
+        }
+
         .cta-card:hover {
             transform: rotate3d(0.4, -0.7, 0, 16deg) translateY(-6px);
             box-shadow: rgba(255, 128, 160, 0.35) 0 28px 70px -18px;
@@ -545,6 +817,11 @@
         .cta-card:hover::before {
             transform: translate3d(14px, -8px, 70px);
             opacity: 1;
+        }
+
+        .cta-card:hover::after {
+            opacity: 1;
+            transform: translate3d(18px, 12px, 60px) rotate(0deg);
         }
 
         .cta-card-content {
@@ -612,22 +889,74 @@
 <body class="bg-gradient-to-br from-black via-red-900 to-pink-900 text-white overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold gradient-text animate-pulse-3d">
-                    3PサークルSmile
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-pink-400 transition-colors duration-300">ホーム</a>
-                    <a href="./pages/about/" class="hover:text-pink-400 transition-colors duration-300">概要</a>
-                    <a href="./pages/profiles/" class="hover:text-pink-400 transition-colors duration-300">メンバー紹介</a>
-                    <a href="./pages/contact/" class="hover:text-pink-400 transition-colors duration-300">お問い合わせ</a>
-                    <a href="./pages/faq/" class="hover:text-pink-400 transition-colors duration-300">FAQ</a>
-                </div>
+    <nav class="site-nav glass-effect">
+        <div class="nav-inner">
+            <a href="#home" class="nav-brand gradient-text animate-pulse-3d">3PサークルSmile</a>
+            <button id="menu-toggle" class="nav-toggle" aria-label="メニューを開閉" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">ホーム</a>
+                <a href="./pages/about/" class="nav-link">概要</a>
+                <a href="./pages/profiles/" class="nav-link">メンバー紹介</a>
+                <a href="./pages/contact/" class="nav-link">お問い合わせ</a>
+                <a href="./pages/faq/" class="nav-link">FAQ</a>
             </div>
         </div>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay" aria-hidden="true">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <span class="mobile-menu-title gradient-text">Menu</span>
+                <button class="mobile-menu-close" id="menu-close" aria-label="メニューを閉じる">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="mobile-menu-links">
+                <a href="#home" class="mobile-menu-link" data-menu-link>
+                    ホーム
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M13 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="./pages/about/" class="mobile-menu-link" data-menu-link>
+                    概要
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M13 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="./pages/profiles/" class="mobile-menu-link" data-menu-link>
+                    メンバー紹介
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M13 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="./pages/contact/" class="mobile-menu-link" data-menu-link>
+                    お問い合わせ
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M13 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="./pages/faq/" class="mobile-menu-link" data-menu-link>
+                    FAQ
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M13 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </div>
 
     <!-- Hero Section with Video -->
     <section id="home" class="relative h-screen flex items-center justify-center perspective">
@@ -815,6 +1144,49 @@
                     heroVideo.addEventListener('loadeddata', attemptPlay, { once: true });
                 }
             }
+
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuClose = document.getElementById('menu-close');
+            const mobileLinks = document.querySelectorAll('[data-menu-link]');
+
+            const setMenuState = (isOpen) => {
+                if (!menuToggle || !mobileMenu) return;
+                menuToggle.classList.toggle('open', isOpen);
+                mobileMenu.classList.toggle('open', isOpen);
+                mobileMenu.setAttribute('aria-hidden', (!isOpen).toString());
+                menuToggle.setAttribute('aria-expanded', isOpen.toString());
+                document.body.classList.toggle('menu-open', isOpen);
+            };
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    const isOpen = !menuToggle.classList.contains('open');
+                    setMenuState(isOpen);
+                });
+            }
+
+            if (menuClose) {
+                menuClose.addEventListener('click', () => setMenuState(false));
+            }
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => setMenuState(false));
+            });
+
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', (event) => {
+                    if (event.target === mobileMenu) {
+                        setMenuState(false);
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    setMenuState(false);
+                }
+            });
         });
 
         // Smooth scroll for navigation links
