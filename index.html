@@ -287,9 +287,9 @@
 
         .application-buttons-section {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            max-width: 1100px;
+            margin: clamp(28px, 7vh, 80px) auto 0;
+            padding: 0 clamp(12px, 4vw, 24px) clamp(36px, 5vh, 48px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -311,11 +311,15 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
-            text-align: center;
+            padding: clamp(24px, 4vh, 64px) 1rem;
             box-sizing: border-box;
-            max-height: 360px;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: clamp(12px, 3vh, 24px);
+            min-height: clamp(220px, 48vh, 380px);
             animation: heroContainerExit 0.4s ease-in forwards;
             animation-delay: 1.6s;
         }
@@ -323,14 +327,13 @@
         .hero-svg {
             width: 100%;
             height: auto;
-            max-width: 1000px;
-            min-height: 180px;
-            margin: 0 auto;
+            max-width: 1024px;
+            min-height: clamp(180px, 38vh, 320px);
         }
 
         .hero-title {
             font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-            font-size: clamp(3rem, calc(6vw + 1vh), 7.5rem);
+            font-size: clamp(3.2rem, calc(6vw + 1.2vh), 7.6rem);
             font-weight: 700;
             fill: url(#redGradient);
             fill-opacity: 0;
@@ -353,11 +356,16 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding: 0 0.5rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .text-container-inner {
+                min-height: clamp(220px, 55vh, 360px);
             }
 
             .hero-title {
-                font-size: clamp(2.6rem, calc(10vw + 1.5vh), 4.2rem);
+                font-size: clamp(3.2rem, calc(12vw + 1.6vh), 4.8rem);
             }
         }
 
@@ -365,11 +373,12 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding: 0 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
 
             .hero-title {
-                font-size: clamp(3.2rem, calc(7.5vw + 1vh), 5.2rem);
+                font-size: clamp(3.8rem, calc(9vw + 1.1vh), 5.8rem);
             }
         }
 
@@ -377,21 +386,226 @@
             .text-container-inner,
             .navigation-section,
             .application-buttons-section {
-                padding: 0 2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
 
             .hero-title {
-                font-size: clamp(4.2rem, calc(5vw + 2vh), 8rem);
+                font-size: clamp(4.8rem, calc(6.2vw + 1.6vh), 8.4rem);
             }
         }
 
-        .card-hover {
-            transition: all 0.3s ease;
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: clamp(18px, 3vw, 28px);
+            width: 100%;
         }
 
-        .card-hover:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        .nav-card {
+            position: relative;
+            display: block;
+            padding: clamp(28px, 5vw, 36px) clamp(20px, 3vw, 28px) clamp(26px, 4vw, 34px);
+            border: 1px solid rgba(255, 128, 160, 0.45);
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(35, 12, 20, 0.68), rgba(88, 18, 45, 0.6));
+            box-shadow: rgba(255, 128, 160, 0.25) 0 20px 45px -20px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: "";
+            position: absolute;
+            inset: -60% 35% auto auto;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.35), transparent 68%);
+            transform: translate3d(0, 0, 60px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 0.75;
+        }
+
+        .nav-card:hover {
+            transform: rotate3d(0.35, 0.75, 0, 18deg) translateY(-4px);
+            box-shadow: rgba(255, 23, 68, 0.4) 0 22px 60px -18px;
+            border-color: rgba(255, 160, 190, 0.85);
+        }
+
+        .nav-card:hover::before {
+            transform: translate3d(-12px, -6px, 80px);
+            opacity: 1;
+        }
+
+        .nav-card-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: clamp(12px, 2vh, 18px);
+            transform-style: preserve-3d;
+        }
+
+        .nav-card-title {
+            font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: #ffe2f1;
+            transform: translate3d(0, 0, 50px);
+        }
+
+        .nav-card-text {
+            font-size: clamp(0.92rem, 1.9vw, 1.05rem);
+            line-height: 1.65;
+            color: rgba(255, 235, 245, 0.86);
+            transform: translate3d(0, 0, 35px);
+        }
+
+        .nav-card-cta {
+            font-size: clamp(0.72rem, 1.4vw, 0.8rem);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: rgba(255, 210, 225, 0.85);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transform: translate3d(0, 0, 25px);
+        }
+
+        .nav-card:hover .nav-card-title,
+        .nav-card:hover .nav-card-text,
+        .nav-card:hover .nav-card-cta {
+            transform: translate3d(0, 0, 70px);
+        }
+
+        .nav-card:hover .nav-card-cta {
+            color: #ffddeb;
+        }
+
+        .nav-card-cta svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .nav-card-badge {
+            position: absolute;
+            top: clamp(18px, 3vw, 26px);
+            right: clamp(18px, 3vw, 26px);
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 128, 160, 0.5);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 210, 223, 0.88);
+            transform: translate3d(0, 0, 90px);
+        }
+
+        .apply-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(18px, 3vw, 28px);
+            width: 100%;
+        }
+
+        .cta-card {
+            position: relative;
+            display: block;
+            border-radius: 28px;
+            padding: clamp(28px, 5vw, 36px);
+            background: linear-gradient(135deg, rgba(45, 18, 32, 0.75), rgba(91, 24, 50, 0.6));
+            border: 1px solid rgba(255, 140, 175, 0.5);
+            box-shadow: rgba(255, 23, 68, 0.24) 0 24px 55px -22px;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+        }
+
+        .cta-card::before {
+            content: "";
+            position: absolute;
+            inset: -50% auto auto -45%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 85, 140, 0.35), transparent 70%);
+            transform: translate3d(0, 0, 50px);
+            transition: transform 0.45s ease, opacity 0.45s ease;
+            opacity: 0.8;
+        }
+
+        .cta-card:hover {
+            transform: rotate3d(0.4, -0.7, 0, 16deg) translateY(-6px);
+            box-shadow: rgba(255, 128, 160, 0.35) 0 28px 70px -18px;
+            border-color: rgba(255, 168, 194, 0.82);
+        }
+
+        .cta-card:hover::before {
+            transform: translate3d(14px, -8px, 70px);
+            opacity: 1;
+        }
+
+        .cta-card-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: clamp(12px, 2vh, 20px);
+            transform-style: preserve-3d;
+        }
+
+        .cta-card-title {
+            font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #ffe0ed;
+            transform: translate3d(0, 0, 50px);
+        }
+
+        .cta-card-text {
+            font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+            line-height: 1.7;
+            color: rgba(255, 240, 246, 0.88);
+            transform: translate3d(0, 0, 35px);
+        }
+
+        .cta-card-cta {
+            font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 204, 222, 0.92);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transform: translate3d(0, 0, 30px);
+        }
+
+        .cta-card-cta svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .cta-card-badge {
+            position: absolute;
+            top: clamp(18px, 3vw, 26px);
+            right: clamp(18px, 3vw, 26px);
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 145, 180, 0.58);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            color: rgba(255, 210, 225, 0.92);
+            transform: translate3d(0, 0, 80px);
+        }
+
+        .cta-card:hover .cta-card-title,
+        .cta-card:hover .cta-card-text,
+        .cta-card:hover .cta-card-cta {
+            transform: translate3d(0, 0, 70px);
         }
     </style>
 </head>
@@ -462,18 +676,45 @@
             <!-- Page Links Section -->
             <div class="blur-fade-in navigation-section">
                 <div class="flex justify-center items-center w-full">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-full">
-                        <a href="./pages/about/" class="glass-effect-dark rounded-2xl p-4 md:p-6 card-hover transition-all duration-300 hover:scale-105">
-                            <h3 class="text-lg md:text-xl font-bold mb-2 gradient-text text-center">概要</h3>
-                            <p class="text-gray-300 text-sm text-center">サークルの理念とコンセプトについて詳しくご紹介します</p>
+                    <div class="nav-grid">
+                        <a href="./pages/about/" class="nav-card">
+                            <div class="nav-card-badge">About</div>
+                            <div class="nav-card-content">
+                                <span class="nav-card-title">概要</span>
+                                <p class="nav-card-text">サークルの理念とコンセプトを、思想の背景とともに丁寧にご紹介します。</p>
+                                <span class="nav-card-cta">More Details
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14" />
+                                        <path d="M13 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
                         </a>
-                        <a href="./pages/contact/" class="glass-effect-dark rounded-2xl p-4 md:p-6 card-hover transition-all duration-300 hover:scale-105">
-                            <h3 class="text-lg md:text-xl font-bold mb-2 gradient-text text-center">お問い合わせ</h3>
-                            <p class="text-gray-300 text-sm text-center">ご質問やご相談はこちらからお気軽にどうぞ</p>
+                        <a href="./pages/contact/" class="nav-card">
+                            <div class="nav-card-badge">Contact</div>
+                            <div class="nav-card-content">
+                                <span class="nav-card-title">お問い合わせ</span>
+                                <p class="nav-card-text">進め方の相談から不安な点の確認まで、個別にヒアリングいたします。</p>
+                                <span class="nav-card-cta">Start Talk
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14" />
+                                        <path d="M13 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
                         </a>
-                        <a href="./pages/faq/" class="glass-effect-dark rounded-2xl p-4 md:p-6 card-hover transition-all duration-300 hover:scale-105">
-                            <h3 class="text-lg md:text-xl font-bold mb-2 gradient-text text-center">FAQ</h3>
-                            <p class="text-gray-300 text-sm text-center">よくある質問と回答をまとめました</p>
+                        <a href="./pages/faq/" class="nav-card">
+                            <div class="nav-card-badge">FAQ</div>
+                            <div class="nav-card-content">
+                                <span class="nav-card-title">FAQ</span>
+                                <p class="nav-card-text">よくある疑問と答えをまとめ、初参加でも迷わないようサポートします。</p>
+                                <span class="nav-card-cta">Read Answers
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14" />
+                                        <path d="M13 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -481,24 +722,33 @@
 
             <!-- Application Buttons Section -->
             <div class="application-buttons-section">
-                <div class="flex justify-center items-center w-full mt-16">
-                    <div class="glass-effect-dark rounded-2xl md:rounded-3xl p-4 md:p-8 max-w-5xl w-full">
-                        <h3 class="text-3xl font-bold mb-8 gradient-text text-center">お申し込み</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
-                            <a href="./pages/contact/?type=female" class="group relative overflow-hidden bg-gradient-to-br from-pink-500 via-red-500 to-pink-600 hover:from-pink-600 hover:via-red-600 hover:to-pink-700 px-6 md:px-10 py-6 md:py-8 rounded-2xl md:rounded-3xl text-white font-bold text-lg md:text-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl transform hover:-translate-y-2 card-hover">
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12 group-hover:animate-pulse"></div>
-                                <div class="relative z-10 text-center">
-                                    <div class="leading-tight">女性のお申し込みはこちら</div>
-                                </div>
-                            </a>
-                            <a href="./pages/contact/?type=male" class="group relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-800 px-6 md:px-10 py-6 md:py-8 rounded-2xl md:rounded-3xl text-white font-bold text-lg md:text-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl transform hover:-translate-y-2 card-hover">
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12 group-hover:animate-pulse"></div>
-                                <div class="relative z-10 text-center">
-                                    <div class="leading-tight">男性のお申し込みはこちら</div>
-                                </div>
-                            </a>
+                <div class="apply-grid">
+                    <a href="./pages/contact/?type=female" class="cta-card">
+                        <div class="cta-card-badge">Female</div>
+                        <div class="cta-card-content">
+                            <span class="cta-card-title">女性エントリー</span>
+                            <p class="cta-card-text">安心できるヒアリングからスタート。ご希望やペースを大切に、体験まで伴走します。</p>
+                            <span class="cta-card-cta">Apply Now
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14" />
+                                    <path d="M13 5l7 7-7 7" />
+                                </svg>
+                            </span>
                         </div>
-                    </div>
+                    </a>
+                    <a href="./pages/contact/?type=male" class="cta-card">
+                        <div class="cta-card-badge">Male</div>
+                        <div class="cta-card-content">
+                            <span class="cta-card-title">男性エントリー</span>
+                            <p class="cta-card-text">マナーと共感性を重視した選考で、心地よい空間づくりに共に取り組みます。</p>
+                            <span class="cta-card-cta">Join Circle
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14" />
+                                    <path d="M13 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
