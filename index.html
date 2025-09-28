@@ -336,11 +336,15 @@
     <section id="home" class="relative h-screen flex items-center justify-center perspective">
         <div class="absolute inset-0 z-0 video-container">
             <video
+                id="hero-video"
                 autoplay
                 muted
                 loop
                 playsinline
+                webkit-playsinline
+                preload="auto"
             >
+                <source src="./assets/videos/1_please_check_202509250226_n8psp.mp4" type="video/mp4">
                 <source src="./assets/videos/1_please_check_202509250226_n8psp.webm" type="video/webm">
                 Your browser does not support the video tag.
             </video>
@@ -459,6 +463,27 @@
                     observer.observe(el);
                 }
             });
+
+            const heroVideo = document.getElementById('hero-video');
+            if (heroVideo) {
+                const attemptPlay = () => {
+                    const playPromise = heroVideo.play();
+                    if (playPromise) {
+                        playPromise.catch(() => {
+                            heroVideo.muted = true;
+                            heroVideo.play().catch(() => {
+                                // Autoplay may still be blocked; leave the default UI in place.
+                            });
+                        });
+                    }
+                };
+
+                if (heroVideo.readyState >= 2) {
+                    attemptPlay();
+                } else {
+                    heroVideo.addEventListener('loadeddata', attemptPlay, { once: true });
+                }
+            }
         });
 
         // Smooth scroll for navigation links
