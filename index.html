@@ -16,11 +16,6 @@
 
         body {
             padding-top: var(--nav-height);
-            padding-left: clamp(16px, 5vw, 64px);
-            padding-right: clamp(16px, 5vw, 64px);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         body.menu-open {
@@ -260,12 +255,9 @@
             }
         }
 
-        @keyframes heroGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 18px rgba(255, 107, 157, 0.65));
-            }
-            50% {
-                filter: drop-shadow(0 0 26px rgba(255, 179, 208, 0.85));
+        @keyframes heroFadeOut {
+            to {
+                opacity: 0;
             }
         }
 
@@ -279,6 +271,16 @@
                 opacity: 1;
                 filter: blur(0px);
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes heroContainerExit {
+            to {
+                opacity: 0;
+                max-height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
             }
         }
 
@@ -561,6 +563,8 @@
             text-align: center;
             gap: clamp(12px, 3vh, 24px);
             min-height: clamp(220px, 48vh, 380px);
+            animation: heroContainerExit 0.4s ease-in forwards;
+            animation-delay: 1.6s;
         }
 
         .hero-svg {
@@ -568,17 +572,6 @@
             height: auto;
             max-width: 1024px;
             min-height: clamp(180px, 38vh, 320px);
-        }
-
-        .hero-section {
-            min-height: calc(100vh - var(--nav-height));
-        }
-
-        .page-shell {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: clamp(48px, 12vh, 96px);
         }
 
         .hero-title {
@@ -594,7 +587,7 @@
             stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
             filter: url(#glow);
-            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroGlow 6s ease-in-out infinite 2.5s;
+            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroFadeOut 0.4s ease-in forwards 1.5s;
         }
 
         .hero-title tspan {
@@ -663,15 +656,15 @@
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
             overflow: hidden;
-            --pointer-x: 65%;
-            --pointer-y: 35%;
         }
 
         .nav-card::before {
             content: "";
             position: absolute;
-            inset: -30% -30% -40% -30%;
-            background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 107, 157, 0.45), transparent 70%);
+            inset: -60% 35% auto auto;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.35), transparent 68%);
             transform: translate3d(0, 0, 60px);
             transition: transform 0.5s ease, opacity 0.5s ease;
             opacity: 0.75;
@@ -680,8 +673,10 @@
         .nav-card::after {
             content: "";
             position: absolute;
-            inset: -50% -20% -50% -40%;
-            background: radial-gradient(circle at calc(var(--pointer-x) + 10%) calc(var(--pointer-y) + 20%), rgba(255, 180, 210, 0.22), transparent 75%);
+            inset: auto -40% -60% auto;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 180, 210, 0.25), transparent 70%);
             transform: translate3d(0, 0, 30px) rotate(15deg);
             opacity: 0;
             transition: transform 0.5s ease, opacity 0.5s ease;
@@ -787,15 +782,15 @@
             transform-style: preserve-3d;
             overflow: hidden;
             transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
-            --pointer-x: 40%;
-            --pointer-y: 40%;
         }
 
         .cta-card::before {
             content: "";
             position: absolute;
-            inset: -40% -35% -35% -40%;
-            background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 85, 140, 0.45), transparent 72%);
+            inset: -50% auto auto -45%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 85, 140, 0.35), transparent 70%);
             transform: translate3d(0, 0, 50px);
             transition: transform 0.45s ease, opacity 0.45s ease;
             opacity: 0.8;
@@ -804,8 +799,10 @@
         .cta-card::after {
             content: "";
             position: absolute;
-            inset: -55% -45% -45% -20%;
-            background: radial-gradient(circle at calc(var(--pointer-x) + 15%) calc(var(--pointer-y) + 15%), rgba(255, 203, 222, 0.22), transparent 75%);
+            inset: auto auto -55% -30%;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(255, 203, 222, 0.22), transparent 72%);
             transform: translate3d(0, 0, 30px) rotate(-12deg);
             opacity: 0;
             transition: transform 0.45s ease, opacity 0.45s ease;
@@ -887,10 +884,6 @@
         .cta-card:hover .cta-card-cta {
             transform: translate3d(0, 0, 70px);
         }
-
-        footer {
-            margin-top: auto;
-        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-black via-red-900 to-pink-900 text-white overflow-x-hidden">
@@ -966,8 +959,7 @@
     </div>
 
     <!-- Hero Section with Video -->
-    <main class="page-shell">
-    <section id="home" class="hero-section relative flex items-center justify-center perspective">
+    <section id="home" class="relative h-screen flex items-center justify-center perspective">
         <div class="absolute inset-0 z-0 video-container">
             <video
                 id="hero-video"
@@ -986,7 +978,7 @@
 
         <div class="relative z-10 w-full h-full flex flex-col justify-center items-center">
             <!-- Text Container -->
-            <div class="text-container-inner moved">
+            <div class="text-container-inner">
                 <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" class="hero-svg">
                     <defs>
                         <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1093,8 +1085,6 @@
 
 
 
-
-    </main>
 
     <!-- Footer -->
     <footer class="py-8 px-6 border-t border-gray-700">
@@ -1209,22 +1199,21 @@
             });
         });
 
-        // Dynamic highlight interaction
-        const interactiveCards = document.querySelectorAll('.nav-card, .cta-card');
+        // Dynamic 3D mouse interaction
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card-hover');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
 
-        interactiveCards.forEach(card => {
-            const updateCardHighlight = (event) => {
+            cards.forEach(card => {
                 const rect = card.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) / rect.width) * 100;
-                const y = ((event.clientY - rect.top) / rect.height) * 100;
-                card.style.setProperty('--pointer-x', `${x}%`);
-                card.style.setProperty('--pointer-y', `${y}%`);
-            };
+                const cardX = (rect.left + rect.width / 2) / window.innerWidth;
+                const cardY = (rect.top + rect.height / 2) / window.innerHeight;
 
-            card.addEventListener('pointermove', updateCardHighlight);
-            card.addEventListener('pointerleave', () => {
-                card.style.setProperty('--pointer-x', '50%');
-                card.style.setProperty('--pointer-y', '50%');
+                const deltaX = (mouseX - cardX) * 10;
+                const deltaY = (mouseY - cardY) * 10;
+
+                card.style.transform = `rotateX(${-deltaY}deg) rotateY(${deltaX}deg)`;
             });
         });
 
