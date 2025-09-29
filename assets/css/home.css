@@ -193,7 +193,8 @@
             }
 
             .video-container video {
-                height: 100%;
+                height: 130%;
+                transform: translateY(-30%);
             }
 
             .text-container-inner.hero-stage {
