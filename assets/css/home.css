@@ -168,6 +168,17 @@
             object-fit: cover;
             object-position: center;
             transform-origin: center center;
+            opacity: 0;
+            filter: blur(12px) saturate(0.9);
+            transform: scale(1.04);
+            transition: opacity 0.8s ease, filter 0.8s ease, transform 1.2s ease;
+            will-change: opacity, filter, transform;
+        }
+
+        .video-container video.hero-video-ready {
+            opacity: 1;
+            filter: blur(0) saturate(1);
+            transform: scale(1);
         }
 
         @media (max-width: 600px) {
@@ -420,49 +431,104 @@
 
         .nav-toggle {
             position: relative;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 128, 160, 0.4);
-            background: rgba(36, 9, 20, 0.6);
+            background: linear-gradient(145deg, rgba(36, 9, 20, 0.82), rgba(70, 14, 32, 0.68));
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
             color: #ffd0e0;
-            transition: background 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: rgba(255, 128, 160, 0.18) 0 14px 28px -12px;
+            overflow: hidden;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+        }
+
+        .nav-toggle::before {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            border-radius: inherit;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 168, 202, 0.18), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .nav-toggle::after {
+            content: "";
+            position: absolute;
+            inset: -60%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.25), transparent 68%);
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.45s ease, opacity 0.45s ease;
         }
 
         .nav-toggle:hover,
         .nav-toggle:focus-visible {
             border-color: rgba(255, 165, 195, 0.75);
-            background: rgba(52, 15, 28, 0.75);
+            box-shadow: rgba(255, 128, 160, 0.35) 0 18px 34px -18px;
+            outline: 2px solid rgba(255, 168, 202, 0.45);
+            outline-offset: 3px;
+        }
+
+        .nav-toggle:hover::before,
+        .nav-toggle:focus-visible::before {
+            opacity: 1;
+        }
+
+        .nav-toggle:active::after {
+            transform: scale(1);
+            opacity: 1;
         }
 
         .nav-toggle span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: #ffd0e0;
+            position: absolute;
+            left: 50%;
+            width: 26px;
+            height: 2.4px;
             border-radius: 999px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            background: linear-gradient(90deg, #ffe6f3, #ff7aa8);
+            transform: translate(-50%, -50%);
+            transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
+        }
+
+        .nav-toggle span:nth-child(1) {
+            top: calc(50% - 9px);
+        }
+
+        .nav-toggle span:nth-child(2) {
+            top: 50%;
+        }
+
+        .nav-toggle span:nth-child(3) {
+            top: calc(50% + 9px);
         }
 
         .nav-toggle.open {
             border-color: rgba(255, 165, 195, 0.8);
-            background: rgba(52, 15, 28, 0.8);
+            background: linear-gradient(145deg, rgba(54, 14, 30, 0.88), rgba(88, 18, 40, 0.72));
+        }
+
+        .nav-toggle.open::before {
+            opacity: 1;
         }
 
         .nav-toggle.open span:nth-child(1) {
-            transform: translateY(6px) rotate(45deg);
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         .nav-toggle.open span:nth-child(2) {
             opacity: 0;
+            transform: translate(-50%, -50%) scaleX(0.2);
         }
 
         .nav-toggle.open span:nth-child(3) {
-            transform: translateY(-6px) rotate(-45deg);
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
         }
 
         @media (min-width: 768px) {

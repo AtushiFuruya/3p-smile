@@ -86,6 +86,7 @@
         <div class="absolute inset-0 z-0 video-container">
             <video
                 id="hero-video"
+                class="hero-video"
                 autoplay
                 muted
                 loop
@@ -267,6 +268,10 @@
 
             const heroVideo = document.getElementById('hero-video');
             if (heroVideo) {
+                const revealVideo = () => {
+                    heroVideo.classList.add('hero-video-ready');
+                };
+
                 const attemptPlay = () => {
                     const playPromise = heroVideo.play();
                     if (playPromise) {
@@ -279,11 +284,21 @@
                     }
                 };
 
-                if (heroVideo.readyState >= 2) {
+                const playWhenReady = () => {
+                    revealVideo();
                     attemptPlay();
+                };
+
+                if (heroVideo.readyState >= 3) {
+                    playWhenReady();
                 } else {
-                    heroVideo.addEventListener('loadeddata', attemptPlay, { once: true });
+                    heroVideo.addEventListener('canplaythrough', playWhenReady, { once: true });
+                    heroVideo.addEventListener('canplay', playWhenReady, { once: true });
+                    heroVideo.addEventListener('loadeddata', revealVideo, { once: true });
                 }
+
+                heroVideo.addEventListener('playing', revealVideo, { once: true });
+                heroVideo.addEventListener('error', revealVideo, { once: true });
             }
 
             const menuToggle = document.getElementById('menu-toggle');
