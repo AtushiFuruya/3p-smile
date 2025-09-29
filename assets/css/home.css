@@ -651,8 +651,8 @@
 
         .navigation-section {
             width: min(90%, 1200px);
-            margin: clamp(18px, 8vh, 96px) auto 0;
-            padding: 0 clamp(12px, 2vw, 20px);
+            margin: clamp(32px, 10vh, 108px) auto 0;
+            padding: 0 clamp(16px, 3vw, 32px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -666,8 +666,8 @@
 
         .application-buttons-section {
             width: min(90%, 1200px);
-            margin: clamp(28px, 7vh, 80px) auto 0;
-            padding: 0 clamp(12px, 2vw, 20px) clamp(36px, 5vh, 48px);
+            margin: clamp(32px, 10vh, 112px) auto 0;
+            padding: clamp(12px, 3vh, 28px) clamp(16px, 3vw, 32px) clamp(40px, 6vh, 52px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -687,16 +687,16 @@
 
         .text-container-inner {
             width: min(90%, 1200px);
-            margin: 0 auto;
-            padding: clamp(24px, 4vh, 64px) clamp(12px, 2vw, 20px);
+            margin: clamp(24px, 6vh, 56px) auto 0;
+            padding: clamp(24px, 5vh, 68px) clamp(16px, 4vw, 32px);
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: clamp(12px, 3vh, 24px);
-            min-height: clamp(220px, 48vh, 380px);
+            gap: clamp(16px, 4vh, 28px);
+            min-height: clamp(240px, 52vh, 400px);
             position: relative;
             z-index: 2;
         }
