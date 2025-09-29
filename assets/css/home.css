@@ -595,7 +595,7 @@
             filter: blur(12px);
             transform: translateY(20px);
             animation: navFadeIn 0.8s ease-out forwards;
-            animation-delay: 1.9s;
+            animation-delay: 2.9s;
             box-sizing: border-box;
         }
 
@@ -608,7 +608,7 @@
             align-items: center;
             opacity: 0;
             animation: blurFadeIn 1.2s ease-out forwards;
-            animation-delay: 2.6s;
+            animation-delay: 3.6s;
             box-sizing: border-box;
         }
 
@@ -616,7 +616,7 @@
         .text-fade-in {
             opacity: 0;
             animation: textFadeIn 1s ease-out forwards;
-            animation-delay: 2s;
+            animation-delay: 3s;
         }
 
 
@@ -687,7 +687,7 @@
             stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
             filter: url(#glow);
-            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroGlow 6s ease-in-out infinite 2.3s;
+            animation: heroDraw 1s ease-out forwards 0.5s, heroFill 0s forwards 1.3s, heroGlow 6s ease-in-out infinite 3.3s;
         }
 
         .hero-title tspan {
