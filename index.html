@@ -268,8 +268,11 @@
 
             const heroVideo = document.getElementById('hero-video');
             if (heroVideo) {
+                const videoContainer = heroVideo.closest('.video-container');
                 const revealVideo = () => {
-                    heroVideo.classList.add('hero-video-ready');
+                    if (videoContainer) {
+                        videoContainer.classList.add('video-ready');
+                    }
                 };
 
                 const attemptPlay = () => {
