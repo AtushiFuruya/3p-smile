@@ -114,7 +114,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - var(--nav-height));
+            min-height: 100vh;
         }
 
         body.hero-intro-active {
@@ -167,24 +167,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transform-origin: center top;
-        }
-
-        @media (max-width: 768px) {
-            .video-container video {
-                width: auto;
-                height: 100%;
-                min-width: 100%;
-            }
-
-            .hero-content {
-                padding-top: 80px;
-                padding-bottom: 40px;
-            }
-
-            .svg-container {
-                padding: 0 1rem;
-            }
+            transform-origin: center center;
         }
 
         @media (max-width: 600px) {
