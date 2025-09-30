@@ -815,6 +815,7 @@
             position: relative;
             display: block;
             padding: clamp(28px, 5vw, 36px) clamp(20px, 3vw, 28px) clamp(26px, 4vw, 34px);
+            padding-top: clamp(48px, 7vw, 68px);
             border: 1px solid rgba(255, 128, 160, 0.38);
             border-radius: 12px;
             background: linear-gradient(135deg, rgba(35, 12, 20, 0.72), rgba(88, 18, 45, 0.64));
