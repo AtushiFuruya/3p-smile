@@ -1,1 +1,5 @@
-circle-smile/
+/circle-smile/
+.env
+db_data/
+wp_data/
+*.zip
