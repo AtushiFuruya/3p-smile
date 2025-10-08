@@ -1,0 +1,123 @@
+:root {
+    --nav-height: clamp(70px, 11vw, 96px);
+    --icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='M13 5l7 7-7 7'/%3E%3C/svg%3E");
+}
+
+html {
+    scroll-padding-top: var(--nav-height);
+}
+
+body {
+    padding-top: var(--nav-height);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+body.hero-intro-active {
+    overflow: hidden;
+}
+
+.page-shell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(56px, 12vh, 96px);
+    padding-bottom: clamp(48px, 10vh, 120px);
+}
+
+.hero-section {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 23, 68, 0.15);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+    .glass-effect {
+        background: rgba(255, 23, 68, 0.25);
+    }
+}
+
+.glass-effect-dark {
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 23, 68, 0.4);
+}
+
+@supports not (backdrop-filter: blur(15px)) {
+    .glass-effect-dark {
+        background: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #ff1744, #e91e63, #ff6b9d, #ff1744);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+.sexy-glow {
+    filter: drop-shadow(0 0 15px rgba(255, 23, 68, 0.5));
+}
+
+.navigation-section,
+.application-buttons-section {
+    width: min(90%, 1200px);
+    margin: clamp(32px, 10vh, 112px) auto 0;
+    padding: 0 clamp(16px, 3vw, 32px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.navigation-section {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(20px);
+    animation: navFadeIn 0.8s ease-out forwards;
+    animation-delay: 2.9s;
+}
+
+.application-buttons-section {
+    padding: clamp(12px, 3vh, 28px) clamp(16px, 3vw, 32px) clamp(40px, 6vh, 52px);
+    opacity: 0;
+    animation: blurFadeIn 1.2s ease-out forwards;
+    animation-delay: 3.6s;
+}
+
+.text-fade-in {
+    opacity: 0;
+    animation: textFadeIn 1s ease-out forwards;
+    animation-delay: 3s;
+}
+
+.perspective {
+    perspective: 1000px;
+}
+
+.transform-3d {
+    transform-style: preserve-3d;
+}
+
+footer {
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}

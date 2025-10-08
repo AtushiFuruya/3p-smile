@@ -1,0 +1,28 @@
+.profile-card {
+    transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 5 / 6;
+    background: linear-gradient(135deg, #374151, #6b7280, #9ca3af);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d1d5db;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .profile-image {
+        max-width: 100%;
+    }
+}
